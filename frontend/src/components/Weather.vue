@@ -1,8 +1,8 @@
 <template>
 
-    <div style="display:flex">
+    <div style="display:flex !important;">
         <App v-if="false"></App>
-        <v-card style="width:450px;" outlined>
+        <v-card style="width:450px; height:950px" outlined>
             <template slot="progress">
                 <v-progress-linear
                         color="deep-purple"
@@ -67,8 +67,13 @@
                 </v-form>
             </v-card-text>
         </v-card>
-        
-        <v-card style="margin-left:100px; height:350px; width:500px" v-if="result[0]">
+        <div style="display: table-cell">
+            <div v-for="(data,idx) in result[0]" :key="idx">
+                <WeatherCard :degree="data.degree" :wind="data.wind" :precipitation="data.precipitation"
+                    :humidity="data.humidity" :location="data.location" :date="data.date" :weatherBg="data.weatherBg"></WeatherCard>
+            </div>
+        </div>
+        <!-- <v-card style="margin-left:100px; height:350px; width:500px" v-if="result[0]">
             <v-card-title>검색결과 - {{result[0].location}} ({{result[0].date}})</v-card-title>
             <v-card-text>
                 <div>
@@ -97,20 +102,20 @@
                     </v-img>
                 </div>
             </v-card-text>
-        </v-card>
+        </v-card> -->
     </div>
 </template>
 
 <script>
     const axios = require('axios').default;
     import App from './../App.vue';
+    import WeatherCard from './WeatherCard.vue';
     
     export default {
         name: 'Weather',
-        components:{App},
+        components:{App, WeatherCard},
         props: {
             result: Array,
-            weatherBg: String,
         },
         data: () => ({
             date: "",

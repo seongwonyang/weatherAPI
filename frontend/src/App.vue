@@ -24,7 +24,7 @@
                 <v-spacer></v-spacer>
             </v-app-bar>
 
-            <v-navigation-drawer app clipped flat v-model="sideBar">
+            <v-navigation-drawer app clipped flat>
                 <v-list>
 
 
@@ -95,20 +95,28 @@ export default {
             me.result = []
             axios.get(`/weathers/search/${this.keyword}`).then(function(response){
 
-                me.result.push(response.data[0])
+                me.result.push(response.data)
+
+                console.log(me.result[0][0])
+                console.log(me.result[0][1])
 
                 if(!response.data[0]){
                     alert("해당 지역의 정보가 없습니다.")
                     return false
                 }
 
-                if(me.result[0].precipitation<25) {
-                    me.weatherBg = "https://user-images.githubusercontent.com/92732781/174241118-7832da47-bbb8-481c-a11a-737a6b986104.png";
-                } else if(me.result[0].precipitation>=25 && me.result[0].precipitation<70) {
-                    me.weatherBg = "https://user-images.githubusercontent.com/92732781/174242976-3f6d5bda-7bcb-404b-a299-84961e2f0c54.png";
-                } else if(me.result[0].precipitation>=70) {
-                    me.weatherBg = "https://user-images.githubusercontent.com/92732781/174243446-886452db-083a-4882-b02e-efd577ce17f6.png";
+                for(var i=0; i<me.result[0].length; i++){
+                    if(me.result[0][i].precipitation<25) {
+                        me.result[0][i].weatherBg = "https://user-images.githubusercontent.com/92732781/174241118-7832da47-bbb8-481c-a11a-737a6b986104.png";
+                    } else if(me.result[0][i].precipitation>=25 && me.result[0][i].precipitation<70) {
+                        me.result[0][i].weatherBg = "https://user-images.githubusercontent.com/92732781/174242976-3f6d5bda-7bcb-404b-a299-84961e2f0c54.png";
+                    } else if(me.result[0][i].precipitation>=70) {
+                        me.result[0][i].weatherBg = "https://user-images.githubusercontent.com/92732781/174243446-886452db-083a-4882-b02e-efd577ce17f6.png";
+                    }
                 }
+
+                console.log(me.result[0])
+
 
 
             }).catch(function (error) {
