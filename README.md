@@ -8,4 +8,4 @@
 
 ### spring h2 DB 사용
 ### input Weather Data 부분에서 Data insert
-### DB에 저장된 지역이름으로 
+### DB에 저장된 지역이름으로 날씨조회
