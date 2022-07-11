@@ -1,6 +1,7 @@
-package weather.infra;
+package weather.infra.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
@@ -29,14 +30,16 @@ public class WeatherController {
     public List<Weather> searchWeather(
         @PathVariable(value = "location") String location,
         HttpServletRequest request,
-        HttpServletResponse response
-    ) throws Exception {
+        HttpServletResponse response) {
+
         System.out.println("##### /weather/searchWeather  called #####");
         List<Weather> result = weatherRepository.findByLocation(location);
 
-        log.debug("search Weather");
+        log.debug("search Weather processing");
+        log.info("search Weather successful");
+        log.warn("search Weather have some issue");
+        log.error("###### search Weather is failed! ######");
         
         return result;
     }
-    // keep
 }

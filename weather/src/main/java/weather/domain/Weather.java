@@ -5,7 +5,7 @@ import lombok.Data;
 import weather.WeatherApplication;
 
 @Entity
-@Table(name = "Weather_table")
+@Table(name = "weather")
 @Data
 public class Weather {
 
@@ -25,21 +25,10 @@ public class Weather {
 
     private Double wind;
 
-    @PostPersist
-    public void onPostPersist() {
-        SavedWeather savedWeather = new SavedWeather(this);
-        savedWeather.publishAfterCommit();
-    }
-
     public static WeatherRepository repository() {
         WeatherRepository weatherRepository = WeatherApplication.applicationContext.getBean(
             WeatherRepository.class
         );
         return weatherRepository;
-    }
-
-    public void searchWeather() {
-        SearchedWeather searchedWeather = new SearchedWeather(this);
-        searchedWeather.publishAfterCommit();
     }
 }

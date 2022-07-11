@@ -63,5 +63,4 @@ Following problems may be occurred:
 1. ImgPullBackOff:  Kubernetes failed to pull the image with the image name you've specified at the deployment.yaml. Please check your image name and ensure you have pushed the image properly.
 1. CrashLoopBackOff: The spring application is not running properly. If you didn't provide the kafka installation on the kubernetes, the application may crash. Please install kafka firstly:
 
-https://labs.msaez.io/#/courses/cna-full/full-course-cna/ops-utility
 

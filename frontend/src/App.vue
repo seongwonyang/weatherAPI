@@ -93,7 +93,7 @@ export default {
             var me = this
 
             me.result = []
-            axios.get(`/weathers/search/${this.keyword}`).then(function(response){
+            axios.get(`/weathers/search/${me.keyword}`).then(function(response){
 
                 me.result.push(response.data)
 
